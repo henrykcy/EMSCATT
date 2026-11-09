@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "emscatt"
+version = "0.1.0"
+description = "Scattering-centre modelling and coherent component assembly for radar cross section"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.22", "scipy>=1.8", "matplotlib>=3.5"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+emscatt = "emscatt.__main__:main"
+
+[tool.setuptools]
+packages = ["emscatt"]

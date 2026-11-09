@@ -1,0 +1,62 @@
+== Synthesising data (independent PO solver + interaction term) ==
+
+== A. Whole-target scattering-centre extraction (part-labelled) ==
+   full-target     :  15 centres, residual  -32.2 dB aspect-balanced /  -35.5 dB unweighted, noise floor  -36.6 dB (22s)
+Fit: 15 centres, residual energy -32.2 dB (aspect-balanced), -35.5 dB (unweighted); noise floor -36.6 dB
+   part fin/panel            energy share    -4.1 dB
+   part intake/face          energy share    -6.9 dB
+   part wing_L/trailing_edge energy share   -10.1 dB
+   part wing_R/trailing_edge energy share   -10.1 dB
+   part wing_R/leading_edge  energy share   -11.8 dB
+   part wing_L/leading_edge  energy share   -11.8 dB
+   part fuselage/fuselage    energy share   -13.8 dB
+   part intake/pod           energy share   -21.5 dB
+   part wing_R/root          energy share   -21.6 dB
+   part wing_L/root          energy share   -21.6 dB
+   part wing_L/tip           energy share   -31.5 dB
+   part wing_R/tip           energy share   -31.5 dB
+   part fin/leading_edge     energy share   -29.6 dB
+   accuracy vs data: field_error_db=-35.49, rms_db_error=0.45, sector_mean_error_db_rms=0.26, sector_mean_error_db_max=0.92
+
+== B. Component models (each fitted in its own measurement frame) ==
+   fuselage        :  18 centres, residual  -25.8 dB aspect-balanced /  -38.0 dB unweighted, noise floor  -26.5 dB (10s)
+   wing35          :   4 centres, residual  -24.7 dB aspect-balanced /  -42.1 dB unweighted, noise floor  -24.9 dB (2s)
+   fin             :   2 centres, residual  -20.4 dB aspect-balanced /  -44.3 dB unweighted, noise floor  -20.3 dB (0s)
+   intake          :   4 centres, residual  -26.3 dB aspect-balanced /  -44.4 dB unweighted, noise floor  -26.5 dB (2s)
+Assembly 'airframe':
+  + fuselage          18 centres  t=(0.000,0.000,0.000)  
+  + wing_R             4 centres  t=(0.550,-0.180,0.000)  
+  + wing_L             4 centres  t=(0.550,0.180,0.000)  mirror
+  + fin                2 centres  t=(-1.000,0.000,0.150)  
+  + intake             4 centres  t=(1.200,0.000,-0.320)  
+   assembly (no interaction)  vs full data: field_error_db=-21.32, rms_db_error=3.04, sector_mean_error_db_rms=4.35, sector_mean_error_db_max=13.62
+   incoherent power sum       vs full data: field_error_db=2.69, rms_db_error=3.48, sector_mean_error_db_rms=4.45, sector_mean_error_db_max=13.91
+   interaction model: 16 centres (true synthetic terms: two junction scatterers at (-0.50, +/-0.25))
+      interaction centre at ( -0.50, -0.25) peak  -10.0 dBsm
+      interaction centre at ( -0.50,  0.25) peak   -9.9 dBsm
+      interaction centre at ( -0.54, -0.22) peak  -13.1 dBsm
+      interaction centre at ( -0.54,  0.22) peak  -13.1 dBsm
+      interaction centre at ( -0.46, -0.28) peak  -13.0 dBsm
+      interaction centre at ( -0.46,  0.28) peak  -13.1 dBsm
+      interaction centre at ( -0.41,  0.01) peak  -35.0 dBsm
+      interaction centre at ( -0.40,  0.22) peak  -32.7 dBsm
+      interaction centre at ( -0.41, -0.22) peak  -32.3 dBsm
+      interaction centre at ( -0.59,  0.28) peak  -32.0 dBsm
+      interaction centre at ( -0.58, -0.28) peak  -31.3 dBsm
+      interaction centre at ( -0.72,  1.97) peak  -50.8 dBsm
+      interaction centre at ( -0.58,  0.46) peak  -36.0 dBsm
+      interaction centre at ( -0.71, -1.98) peak  -50.3 dBsm
+      interaction centre at ( -1.17,  1.98) peak  -50.2 dBsm
+      interaction centre at ( -1.18, -1.98) peak  -51.1 dBsm
+   assembly + interaction     vs full data: field_error_db=-42.97, rms_db_error=0.17, sector_mean_error_db_rms=0.06, sector_mean_error_db_max=0.16
+   assembly + interaction     vs noise-free truth: field_error_db=-47.07, rms_db_error=0.08, sector_mean_error_db_rms=0.04, sector_mean_error_db_max=0.09
+
+== C. Design iteration: re-measure only the wing (sweep 35 -> 45 deg) ==
+   wing45          :   4 centres, residual  -24.3 dB aspect-balanced /  -43.4 dB unweighted, noise floor  -24.5 dB (2s)
+   predicted new aircraft vs true new aircraft: field_error_db=-46.98, rms_db_error=0.08, sector_mean_error_db_rms=0.04, sector_mean_error_db_max=0.12
+   10-deg sector-mean RCS change: true range [-22.8, 17.7] dB; prediction error rms 0.03 dB, max 0.16 dB
+
+== D. Guard rails ==
+   component 'fin': 94% of requested aspects lie outside its measured coverage -> prediction would be extrapolated (re-measure in 3-D)
+
+Total run time 90s.  Figures and models written to /home/user/EMSCATT/examples/output
